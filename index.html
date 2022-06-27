@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML TO IMG</title>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+</head>
+
+<body>
+    <div id="capture" style="padding: 10px; background: #f5da55">
+        <h4 style="color: #000; ">Hello world!</h4>
+    </div>
+    <div id="display_img_base_64">123</div>
+    <button onclick="block_capture()">擷取區塊</button>
+    <button onclick="block_capture_download()">擷取區塊下載</button>
+</body>
+
+</html>
+
+<script>
+    // 取得區塊 Base64
+    function block_capture() {
+        html2canvas(document.querySelector("#capture")).then(function (canvas) {
+            a = document.createElement("a");
+            a.href = canvas
+                .toDataURL("image/jpeg", 0.92);
+            document.getElementById("display_img_base_64").innerHTML = a;
+        });
+    }
+    // 下載
+    function block_capture_download() {
+        html2canvas(document.querySelector("#capture")).then(function (canvas) {
+            a = document.createElement("a");
+            a.href = canvas
+                .toDataURL("image/jpeg", 0.92);
+            a.download = "image.jpg";
+            a.click();
+        });
+    }
+</script>
